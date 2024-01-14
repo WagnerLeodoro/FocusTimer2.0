@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Temporizador estilo pomodoro" />
+    <link rel="shortcut icon" href="./assets/favicon.svg" type="image/x-icon" />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script type="module" defer src="./src/main.js"></script>
+
+    <title>Focus Timer 2.0</title>
+  </head>
+  <body>
+    <div id="app">
+      <button id="toggle-mode">
+        <span class="sr-only">Ativar light mode!</span>
+        <i class="ph-bold ph-sun"></i>
+        <i class="ph-bold ph-moon"></i>
+      </button>
+      <div id="timer" class="flex">
+        <section>
+          <span id="minutes"> 00 </span>
+          <span>:</span>
+          <span id="seconds">00</span>
+        </section>
+        <section id="controls" class="flex">
+          <button data-action="toggleRunning" class="ph ph-play-circle">
+            <span class="sr-only">Inciar contador</span>
+          </button>
+          <button data-action="toggleRunning" class="ph ph-pause-circle">
+            <span class="sr-only">Pausar contador</span>
+          </button>
+          <button
+            data-action="increaseTime"
+            class="ph ph-plus-circle secondary"
+          >
+            <span class="sr-only">Acrescentar 5 minutos</span>
+          </button>
+          <button
+            data-action="shortenTime"
+            class="ph ph-minus-circle secondary"
+          >
+            <span class="sr-only">Diminuir 5 minutos</span>
+          </button>
+        </section>
+      </div>
+      <div id="music-options" class="music-controls">
+        <button
+          id="forest"
+          data-action="toggleMusic"
+          class="ph ph-tree secondary"
+        >
+          <span class="sr-only">Inciar musica</span>
+        </button>
+        <button
+          id="cloud-rain"
+          data-action="toggleMusic"
+          class="ph ph-cloud-rain secondary"
+        >
+          <span class="sr-only">Parar musica</span>
+        </button>
+        <button
+          id="cafeteria"
+          data-action="toggleMusic"
+          class="ph ph-storefront secondary"
+        >
+          <span class="sr-only">Parar musica</span>
+        </button>
+        <button
+          id="fireplace"
+          data-action="toggleMusic"
+          class="ph ph-fire secondary"
+        >
+          <span class="sr-only">Parar musica</span>
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
