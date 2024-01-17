@@ -145,7 +145,6 @@ html:not(.running) .ph-pause-circle,
 html:not(.running) .ph-stop-circle {
   display: none;
 }
-
 #music-options button.active {
   background-color: hsl(194, 97%, 31%);
   color: white;

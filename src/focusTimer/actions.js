@@ -29,5 +29,4 @@ export function reset() {
 
 export function toggleMusic() {
   state.isMute = document.documentElement.classList.toggle('music-on')
-  toggleRunning()
 }

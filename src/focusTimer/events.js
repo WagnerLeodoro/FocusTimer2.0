@@ -1,12 +1,19 @@
 import * as actions from './actions.js'
-import * as el from './elements.js'
-import * as timer from './timer.js'
+import {
+  controls,
+  musicOptions,
+  forest,
+  cloudRain,
+  cafeteria,
+  fireplace,
+  minutes,
+} from './elements.js'
 import * as sounds from './sounds.js'
 import state from './state.js'
 import { updateDisplay } from './timer.js'
 
 export function registerControls() {
-  el.controls.addEventListener('click', (event) => {
+  controls.addEventListener('click', (event) => {
     const action = event.target.dataset.action
     if (typeof actions[action] != 'function') {
       return
@@ -14,7 +21,7 @@ export function registerControls() {
     actions[action]()
   })
 
-  el.musicOptions.addEventListener('click', (event) => {
+  musicOptions.addEventListener('click', (event) => {
     const action = event.target.dataset.action
     if (typeof actions[action] != 'function') {
       return
@@ -24,71 +31,75 @@ export function registerControls() {
 }
 
 function clearSelection() {
-  document.querySelectorAll('#music-options .ph').forEach((element) => {
-    if (element.classList.contains('active')) element.classList.remove('active')
-  })
+  forest.classList.remove('active')
+  cloudRain.classList.remove('active')
+  cafeteria.classList.remove('active')
+  fireplace.classList.remove('active')
 }
 
-el.forest.addEventListener('click', (e) => {
-  if (!state.isMute) {
-    e.preventDefault()
-    clearSelection()
-    document.querySelector('.ph-tree').classList.add('active')
+function addSelection(element) {
+  clearSelection()
+  element.classList.add('active')
+}
+
+forest.addEventListener('click', (e) => {
+  e.preventDefault()
+  sounds.resetSounds()
+  if (!forest.classList.contains('active')) {
+    addSelection(forest)
     sounds.forestSound.play()
     return
   }
   clearSelection()
-  sounds.resetSounds()
 })
 
-el.cloudRain.addEventListener('click', (e) => {
-  if (!state.isMute) {
-    e.preventDefault()
-    clearSelection()
-    document.querySelector('.ph-cloud-rain').classList.add('active')
+cloudRain.addEventListener('click', (e) => {
+  e.preventDefault()
+  sounds.resetSounds()
+  if (!cloudRain.classList.contains('active')) {
+    addSelection(cloudRain)
     sounds.rainSound.play()
     return
   }
   clearSelection()
-  sounds.resetSounds()
 })
 
-el.cafeteria.addEventListener('click', (e) => {
-  if (!state.isMute) {
-    e.preventDefault()
-    clearSelection()
-    document.querySelector('.ph-storefront').classList.add('active')
+cafeteria.addEventListener('click', (e) => {
+  e.preventDefault()
+  sounds.resetSounds()
+
+  if (!cafeteria.classList.contains('active')) {
+    addSelection(cafeteria)
     sounds.cafeteriaSound.play()
     return
   }
   clearSelection()
-  sounds.resetSounds()
 })
 
-el.fireplace.addEventListener('click', (e) => {
-  if (!state.isMute) {
-    e.preventDefault()
-    clearSelection()
-    document.querySelector('.ph-fire').classList.add('active')
+fireplace.addEventListener('click', (e) => {
+  e.preventDefault()
+  sounds.resetSounds()
+
+  if (!fireplace.classList.contains('active')) {
+    addSelection(fireplace)
     sounds.fireplaceSound.play()
     return
   }
   clearSelection()
-  sounds.resetSounds()
 })
 
 export function setMinutes() {
-  el.minutes.addEventListener('focus', () => {
-    el.minutes.textContent = ''
+  minutes.addEventListener('focus', () => {
+    minutes.textContent = ''
   })
-  el.minutes.onkeypress = (e) => /\d/.test(e.key)
-  el.minutes.addEventListener('blur', (e) => {
+  minutes.onkeypress = (e) => /\d/.test(e.key)
+  minutes.addEventListener('blur', (e) => {
     let time = e.currentTarget.textContent
     time = time > 60 ? 60 : time
     state.minutes = time
     state.seconds = 0
 
     updateDisplay()
-    el.minutes.removeAttribute('contenteditable')
+    minutes.removeAttribute('contenteditable')
   })
 }
